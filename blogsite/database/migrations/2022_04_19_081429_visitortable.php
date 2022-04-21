@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('ip_address');
 	        $table->string('visit_time');
 });
+
     }
 
     /**
