@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('layout.home');
 // });
 
-Route::get('/','App\Http\Controllers\visitorController@homeindex');
+Route::get('/','App\Http\Controllers\homecontroller@homeindex');

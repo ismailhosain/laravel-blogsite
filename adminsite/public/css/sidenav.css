@@ -204,7 +204,7 @@ sidebar navigation
 }
 
 .sidebar-nav ul li a {
-    color: #607d8b;
+    color: #ffffff;
     padding: 8px 35px 8px 15px;
     display: block;
     font-size: 14px;
@@ -212,7 +212,7 @@ sidebar navigation
 
 .sidebar-nav ul li a.active,
 .sidebar-nav ul li a:hover {
-    color: #1976d2;
+    color: #ffffff;
 }
 
 .sidebar-nav ul li a.active i,
@@ -222,7 +222,7 @@ sidebar navigation
 
 .sidebar-nav ul li a.active {
     font-weight: 500;
-    color: #263238;
+    color: #ffffff;
 }
 
 .sidebar-nav ul li ul {

@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','App\Http\Controllers\homeController@homeindex');
 
 Route::get('/visitor','App\Http\Controllers\visitorController@visitorindex');
+
+Route::get('/service','App\Http\Controllers\servicecontroller@serviceindex');
+
+Route::get('/getservice','App\Http\Controllers\servicecontroller@getserviceindex');
