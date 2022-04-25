@@ -21,6 +21,13 @@ class servicecontroller extends Controller
 
     return $result;
 
+  } 
+
+  function servicedelete(){
+    
+
+    return "Delete";
+
   }
 
 
