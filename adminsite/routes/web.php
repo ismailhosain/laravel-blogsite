@@ -21,4 +21,4 @@ Route::get('/service','App\Http\Controllers\servicecontroller@serviceindex');
 
 Route::get('/getservice','App\Http\Controllers\servicecontroller@getserviceindex');
 
-Route::get('/deleteservice','App\Http\Controllers\servicecontroller@servicedelete');
+Route::post('/deleteservice','App\Http\Controllers\servicecontroller@servicedelete');

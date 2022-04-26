@@ -26,10 +26,25 @@ $('#imageload').addClass('d-none');
       "<td>"+dataJSON[i].service_name+"</td>"+
       "<td>"+dataJSON[i].service_des+"</td>"+
       "<td><a href=''><i class='fas fa-edit'></i></a></td>"+
-      "<td><a data-toggle='modal' data-target='#deletemodal'><i class='fas fa-trash-alt'></i></a></td>"
+      "<td><a data-toggle='modal' class='servicedeleteid' data-id="+dataJSON[i].id+" data-target='#deletemodal'><i class='fas fa-trash-alt'></i></a></td>"
    
       ).appendTo('#service_id');
    });
+
+$('.servicedeleteid').click(function(){
+
+  var id=$(this).data('id');
+
+  $('#servicedeleteid').html(id);
+  $('#deletemodal').modal('show');
+
+   
+
+  
+
+
+})
+
 
 
 }else{
