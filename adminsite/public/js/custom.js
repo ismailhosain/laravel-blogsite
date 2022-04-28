@@ -1,67 +1,93 @@
-$(document).ready(function () {
-$('#VisitorDt').DataTable();
-$('.dataTables_length').addClass('bs-select');
+$(document).ready(function() {
+    $('#VisitorDt').DataTable();
+    $('.dataTables_length').addClass('bs-select');
 });
 
 
 
 
-function getservicedata(){
+function getservicedata() {
 
-axios.get('/getservice')
-  .then(function (response) {
-
-
-if(response.status==200){
-
-$('#maindev').removeClass('d-none');
-$('#imageload').addClass('d-none');
+    axios.get('/getservice')
+        .then(function(response) {
 
 
- var dataJSON=response.data;
-    $.each(dataJSON, function(i, item) {
-    $('<tr>').html(
+            if (response.status == 200) {
 
-      "<td>+<img class='table-img' src="+dataJSON[i].service_img+"></td>"+
-      "<td>"+dataJSON[i].service_name+"</td>"+
-      "<td>"+dataJSON[i].service_des+"</td>"+
-      "<td><a href=''><i class='fas fa-edit'></i></a></td>"+
-      "<td><a data-toggle='modal' class='servicedeleteid' data-id="+dataJSON[i].id+" data-target='#deletemodal'><i class='fas fa-trash-alt'></i></a></td>"
-   
-      ).appendTo('#service_id');
-   });
+                $('#maindev').removeClass('d-none');
+                $('#imageload').addClass('d-none');
+                $('#service_id').empty();
 
-$('.servicedeleteid').click(function(){
+                var dataJSON = response.data;
+                $.each(dataJSON, function(i, item) {
+                    $('<tr>').html(
 
-  var id=$(this).data('id');
+                        "<td>+<img class='table-img' src=" + dataJSON[i].service_img + "></td>" +
+                        "<td>" + dataJSON[i].service_name + "</td>" +
+                        "<td>" + dataJSON[i].service_des + "</td>" +
+                        "<td><a href=''><i class='fas fa-edit'></i></a></td>" +
+                        "<td><a data-toggle='modal' class='servicedeleteid' data-id=" + dataJSON[i].id + " data-target='#deletemodal'><i class='fas fa-trash-alt'></i></a></td>"
 
-  $('#servicedeleteid').html(id);
-  $('#deletemodal').modal('show');
+                    ).appendTo('#service_id');
+                });
 
-   
+                $('.servicedeleteid').click(function() {
 
-  
+                    var id = $(this).data('id');
+                    $('#servicedeleteid').html(id);
+                    $('#deletemodal').modal('show');
+
+                })
+                    $('#servicedeletebtn').click(function() {
+                        var id = $('#servicedeleteid').html();
+                        servicedeleteaction(id);
 
 
-})
+                    });
+
+            } else {
+
+                $('#imageload').addClass('d-none');
+                $('#wrongtext').removeClass('d-none');
+
+            }
 
 
 
-}else{
+        }).catch(function(error) {
 
-$('#imageload').addClass('d-none');
-$('#wrongtext').removeClass('d-none');
+            $('#imageload').addClass('d-none');
+            $('#wrongtext').removeClass('d-none');
+
+        });
+
 
 }
 
 
-   
-}).catch(function (error) {
 
-$('#imageload').addClass('d-none');
-$('#wrongtext').removeClass('d-none');
 
-});
+// delete yes button function
+
+function servicedeleteaction(deleteid){
+
+
+    axios.post('/deleteservice',{id:deleteid})
+    .then(function(response) {
+
+      if(response.data==1){       
+        $('#deletemodal').modal('hide');
+        toastr.success('DATA DELTE SUCCESSFUL');
+          getservicedata();
+      }else{
+        $('#deletemodal').modal('hide');
+        toastr.error('FAILED');
+        getservicedata();
+      }
+
+        }).catch(function(error) {
+
+        });
 
 
 }

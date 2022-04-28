@@ -70,10 +70,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title mx-auto" id="exampleModalLongTitle">Do You Want DELETE!!!</h4>       
-        <h4 class="modal-title mx-auto" id="servicedeleteid"></h4>       
+        <h4 id="servicedeleteid" class="modal-title mx-auto"></h4>       
       </div>      
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">YES</button>
+        <button data-id=" " id="servicedeletebtn" type="button" class="btn btn-primary" data-dismiss="modal">YES</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
       </div>
     </div>
