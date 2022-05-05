@@ -21,4 +21,6 @@ Route::get('/service','App\Http\Controllers\servicecontroller@serviceindex');
 
 Route::get('/getservice','App\Http\Controllers\servicecontroller@getserviceindex');
 
-Route::post('/deleteservice','App\Http\Controllers\servicecontroller@servicedelete');
+Route::post('/deleteservice','App\Http\Controllers\servicecontroller@servicedelete'); //delete route for indivisual id
+
+Route::post('/editservice','App\Http\Controllers\servicecontroller@servicedetails'); //edit route for indivisual id

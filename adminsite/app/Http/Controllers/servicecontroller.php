@@ -21,7 +21,25 @@ class servicecontroller extends Controller
 
     return $result;
 
+  }  
+
+  //indivisual id edit function
+
+  function servicedetails(Request $req){
+
+     $id=$req->input('id');
+
+    $result=servicemodel::where('id','=',$id)->get();
+
+    return $result;
+
   } 
+
+
+
+
+
+// service delete code
 
   function servicedelete(Request $req){
     
