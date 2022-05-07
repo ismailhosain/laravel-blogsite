@@ -48,20 +48,21 @@ function getservicedata() {
 
                     var id = $(this).data('id');
                     $('#serviceeditid').html(id);
+                    servicedetails(id);
                     $('#editmodal').modal('show');
 
                 })
 
-                // service table modal delete yes btn
+                // service table modal delete yes btn click
 
                 $('#servicedeletebtn').click(function() {
                     var id = $('#servicedeleteid').html();
-                    servicedeleteaction(id);
+                    servicedeleteaction(id); //to execute method from function
 
 
-                }); 
+                });
 
-                // service table modal edit yes btn
+                // service table modal edit yes btn click
 
                 $('#serviceeditbtn').click(function() {
                     var id = $('#serviceeditid').html();
@@ -119,7 +120,7 @@ function servicedeleteaction(deleteid) {
 
 }
 
-//indivisual edit yes button function
+//Catch indivisual edit yes button function
 
 function servicedetails(detailid) {
 
@@ -128,9 +129,26 @@ function servicedetails(detailid) {
             id: detailid
         })
         .then(function(response) {
+            if (response.status == 200) {
+
+                var dataJSON = response.data;
+
+                $('#serviceeditinput').removeClass('d-none');
+                $('#serviceeditload').addClass('d-none');
+
+                $('#titledetails').val(dataJSON[0].service_name);
+                $('#descriptiondetails').val(dataJSON[0].service_des);
+                $('#imagedetails').val(dataJSON[0].service_img);
+
+            } else {
+                $('#serviceeditload').addClass('d-none');
+                $('#serviceedittext').removeClass('d-none');
+
+            }
 
         }).catch(function(error) {
-
+            $('#serviceeditload').addClass('d-none');
+            $('#serviceedittext').removeClass('d-none');
         });
 
 

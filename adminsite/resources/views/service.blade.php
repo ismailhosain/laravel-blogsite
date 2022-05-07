@@ -48,7 +48,7 @@
     <div class="modal-content">
       <div class="modal-body p-5 text-center">
         <h4 id="servicedeleteid" class="modal-title mx-auto"></h4>
-        <h4 class="modal-title mx-auto" id="exampleModalLongTitle">Do You Want DELETE!!!</h4>
+        <h4 class="modal-title mx-auto text-danger" id="exampleModalLongTitle">Do You Want DELETE!!!</h4>
       </div>
       <div class="modal-footer">
         <button data-id=" " id="servicedeletebtn" type="button" class="btn btn-primary" data-dismiss="modal">YES</button>
@@ -66,21 +66,16 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-body p-5 text-center">
+      <div id="serviceeditinput" class="modal-body p-5 text-center d-none">
         
         <h4 id="serviceeditid" class="modal-title mx-auto"></h4>
   
-      <input type="password" id="typePassword" class="form-control mb-3" placeholder="name" />
-      <input type="password" id="typePassword" class="form-control mb-3" placeholder="Description" />
-      <input type="password" id="typePassword" class="form-control" placeholder="image link" />
-
-  
-
-
-
-
-
+      <input id="titledetails" type="text"  class="form-control mb-3" placeholder="name" />
+      <input id="descriptiondetails" type="text" class="form-control mb-3" placeholder="Description" />
+      <input id="imagedetails" type="text" class="form-control" placeholder="image link" />
       </div>
+<img id="serviceeditload" src="{{asset('images/load.svg')}}" alt="image not found"  style="height: 150px;width: auto;">
+<h3 id="serviceedittext" class="mx-auto d-none p-4 text-danger">Something Wend Wrong:-)</h3>
       <div class="modal-footer">
         <button data-id=" " id="serviceeditbtn" type="button" class="btn btn-primary" data-dismiss="modal">save</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
