@@ -19,8 +19,12 @@ Route::get('/visitor','App\Http\Controllers\visitorController@visitorindex');
 
 Route::get('/service','App\Http\Controllers\servicecontroller@serviceindex');
 
+//admin service page controller setup
+
 Route::get('/getservice','App\Http\Controllers\servicecontroller@getserviceindex');
 
 Route::post('/deleteservice','App\Http\Controllers\servicecontroller@servicedelete'); //delete route for indivisual id
 
 Route::post('/editservice','App\Http\Controllers\servicecontroller@servicedetails'); //edit route for indivisual id
+
+Route::post('/serviceupdate','App\Http\Controllers\servicecontroller@serviceupdatesave'); //save data route for indivisual id

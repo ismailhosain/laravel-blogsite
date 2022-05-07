@@ -56,4 +56,24 @@ class servicecontroller extends Controller
   }
 
 
+  // service update code
+
+  function serviceupdatesave(Request $req){
+    
+    $id=$req->input('id');
+    $name=$req->input('name');
+    $desc=$req->input('desc');
+    $img=$req->input('img');
+
+    $result=servicemodel::where('id','=',$id)->update(['service_name'=>$name,'service_des'=>$desc,'service_img'=>$img]);
+    
+    if($result==true){
+      return 1;
+    }else{
+      return 0;
+    }
+
+  }
+
+
 }

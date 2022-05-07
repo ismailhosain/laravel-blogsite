@@ -25,7 +25,7 @@ function getservicedata() {
                         "<td>+<img class='table-img' src=" + dataJSON[i].service_img + "></td>" +
                         "<td>" + dataJSON[i].service_name + "</td>" +
                         "<td>" + dataJSON[i].service_des + "</td>" +
-                        "<td><a class='serviceeditid' data-id=" + dataJSON[i].id + "><i class='fas fa-edit'></i></a></td>" +
+                        "<td><a class='serviceeditclick' data-id=" + dataJSON[i].id + "><i class='fas fa-edit'></i></a></td>" +
                         "<td><a data-toggle='modal' class='servicedeleteid' data-id=" + dataJSON[i].id + " data-target='#deletemodal'><i class='fas fa-trash-alt'></i></a></td>"
 
                     ).appendTo('#service_id');
@@ -44,7 +44,7 @@ function getservicedata() {
 
                 // service table edit icon click
 
-                $('.serviceeditid').click(function() {
+                $('.serviceeditclick').click(function() {
 
                     var id = $(this).data('id');
                     $('#serviceeditid').html(id);
@@ -70,6 +70,19 @@ function getservicedata() {
 
 
                 });
+
+                // service table modal edit save btn click/press
+
+                $('#serviceeditsave').click(function() {
+                    var id = $('#serviceeditid').html();
+                    var name = $('#titledetails').val();
+                    var desc = $('#descriptiondetails').val();
+                    var img = $('#imagedetails').val();
+                    serviceupdatepress(id,name,desc,img);
+
+
+                });
+
 
             } else {
 
@@ -149,6 +162,27 @@ function servicedetails(detailid) {
         }).catch(function(error) {
             $('#serviceeditload').addClass('d-none');
             $('#serviceedittext').removeClass('d-none');
+        });
+
+
+}
+
+//update after press save button
+
+function serviceupdatepress(serviceid,servicename,servicedes,serviceimg) {
+
+
+    axios.post('/serviceupdate', {
+            id: serviceid,
+            name: servicename,
+            desc: servicedes,
+            img: serviceimg,
+        })
+        .then(function(response) {
+         
+
+        }).catch(function(error) {
+         
         });
 
 
