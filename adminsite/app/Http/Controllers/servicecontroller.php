@@ -53,12 +53,12 @@ class servicecontroller extends Controller
       return 0;
     }
 
-  }
+  }  
 
 
-  // service update code
+  //save button service to update code
 
-  function serviceupdatesave(Request $req){
+   function serviceupdatebutton(Request $req){
     
     $id=$req->input('id');
     $name=$req->input('name');
@@ -73,7 +73,27 @@ class servicecontroller extends Controller
       return 0;
     }
 
-  }
+  }  
+
+
+    //add button service to insert code
+
+   function serviceinsertbutton(Request $req){
+  
+    $name=$req->input('name');
+    $desc=$req->input('desc');
+    $img=$req->input('img');
+
+    $result=servicemodel::insert(['service_name'=>$name,'service_des'=>$desc,'service_img'=>$img]);
+    
+    if($result==true){
+      return 1;
+    }else{
+      return 0;
+    }
+
+  }  
+
 
 
 }

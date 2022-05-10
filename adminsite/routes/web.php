@@ -24,7 +24,7 @@ Route::get('/service','App\Http\Controllers\servicecontroller@serviceindex');
 Route::get('/getservice','App\Http\Controllers\servicecontroller@getserviceindex');
 
 Route::post('/deleteservice','App\Http\Controllers\servicecontroller@servicedelete'); //delete route for indivisual id
-
 Route::post('/editservice','App\Http\Controllers\servicecontroller@servicedetails'); //edit route for indivisual id
+Route::post('/editservicesave','App\Http\Controllers\servicecontroller@serviceupdatebutton'); //update save button click route for indivisual id
+Route::post('/insertservicesave','App\Http\Controllers\servicecontroller@serviceinsertbutton'); //add save button click to insert data's
 
-Route::post('/serviceupdate','App\Http\Controllers\servicecontroller@serviceupdatesave'); //save data route for indivisual id

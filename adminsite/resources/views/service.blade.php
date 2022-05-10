@@ -1,8 +1,10 @@
 @extends('layout.app')
 @section('content')
+
 <div id="maindev" class="container d-none">
   <div class="row">
     <div class="col-md-12 p-5">
+<button id="serviceinsertbtn" class="btn btn-sm btn-primary my-3">ADD info</button>
       <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
@@ -41,7 +43,8 @@
 <!-- wrong text end -->
 <!-- modal sectin start -->
 <!-- Button trigger modal -->
-<!--delete Modal -->
+
+<!--delete Modal start-->
 <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -57,7 +60,7 @@
     </div>
   </div>
 </div>
-<!-- modal section end -->
+<!--delete modal section end -->
 
 
 <!-- edit modal start -->
@@ -77,21 +80,43 @@
 <img id="serviceeditload" src="{{asset('images/load.svg')}}" alt="image not found"  style="height: 150px;width: auto;">
 <h3 id="serviceedittext" class="mx-auto d-none p-4 text-danger">Something Wend Wrong:-)</h3>
       <div class="modal-footer">
-        <button data-id=" " id="serviceeditsave" type="button" class="btn btn-primary" data-dismiss="modal">save</button>
+        <button data-id=" " id="serviceupdatebtn" type="button" class="btn btn-primary" data-dismiss="modal">save</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
       </div>
     </div>
   </div>
 </div>
-<!-- modal section end -->
+<!--edit modal section end -->
+
+<!-- insert modal start -->
+
+<div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <form id="formid">    
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div id="serviceinsertinput" class="modal-body p-5 text-center">
+        <input id="inserttitle" type="text"  class="form-control mb-3" placeholder="name" />
+        <input id="insertdescription" type="text" class="form-control mb-3" placeholder="Description" />
+        <input id="insertimage" type="text" class="form-control" placeholder="image link" />
+      </div>
+      <div class="modal-footer">
+        <button data-id=" " id="serviceaddbtn" type="button" class="btn btn-primary" data-dismiss="modal">save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+<!--insert modal section end -->
 
 
-
-<!-- edit modal end -->
 @endsection
 @section('script')
 <script type="text/javascript">
   
-getservicedata()
+getservicedata()  //this is for (custom js's) main function which is called here to execute js function
+
 </script>
 @endsection

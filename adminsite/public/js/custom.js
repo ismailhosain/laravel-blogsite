@@ -3,14 +3,10 @@ $(document).ready(function() {
     $('.dataTables_length').addClass('bs-select');
 });
 
-
-
-
-function getservicedata() {
+function getservicedata() {   //this function call to service view in js tag
 
     axios.get('/getservice')
         .then(function(response) {
-
 
             if (response.status == 200) {
 
@@ -25,12 +21,11 @@ function getservicedata() {
                         "<td>+<img class='table-img' src=" + dataJSON[i].service_img + "></td>" +
                         "<td>" + dataJSON[i].service_name + "</td>" +
                         "<td>" + dataJSON[i].service_des + "</td>" +
-                        "<td><a class='serviceeditclick' data-id=" + dataJSON[i].id + "><i class='fas fa-edit'></i></a></td>" +
+                        "<td><a class='serviceeditsave' data-id=" + dataJSON[i].id + "><i class='fas fa-edit'></i></a></td>" +
                         "<td><a data-toggle='modal' class='servicedeleteid' data-id=" + dataJSON[i].id + " data-target='#deletemodal'><i class='fas fa-trash-alt'></i></a></td>"
 
                     ).appendTo('#service_id');
                 });
-
 
                 // service table delete icon click
 
@@ -44,7 +39,7 @@ function getservicedata() {
 
                 // service table edit icon click
 
-                $('.serviceeditclick').click(function() {
+                $('.serviceeditsave').click(function() {
 
                     var id = $(this).data('id');
                     $('#serviceeditid').html(id);
@@ -53,36 +48,13 @@ function getservicedata() {
 
                 })
 
-                // service table modal delete yes btn click
-
-                $('#servicedeletebtn').click(function() {
-                    var id = $('#servicedeleteid').html();
-                    servicedeleteaction(id); //to execute method from function
-
-
-                });
-
                 // service table modal edit yes btn click
 
                 $('#serviceeditbtn').click(function() {
                     var id = $('#serviceeditid').html();
                     serviceeditsection(id);
 
-
                 });
-
-                // service table modal edit save btn click/press
-
-                $('#serviceeditsave').click(function() {
-                    var id = $('#serviceeditid').html();
-                    var name = $('#titledetails').val();
-                    var desc = $('#descriptiondetails').val();
-                    var img = $('#imagedetails').val();
-                    serviceupdatepress(id,name,desc,img);
-
-
-                });
-
 
             } else {
 
@@ -91,8 +63,6 @@ function getservicedata() {
 
             }
 
-
-
         }).catch(function(error) {
 
             $('#imageload').addClass('d-none');
@@ -100,48 +70,65 @@ function getservicedata() {
 
         });
 
-
 }
 
+// service table modal delete modal yes btn click
 
+$('#servicedeletebtn').click(function() {
+    var id = $('#servicedeleteid').html();
+    servicedeleteaction(id); //to execute method from function
+});
 
-
-// delete yes button function
+//service modal delete yes button function
 
 function servicedeleteaction(deleteid) {
 
+  $('#servicedeletebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
 
     axios.post('/deleteservice', {
             id: deleteid
         })
         .then(function(response) {
-
-            if (response.data == 1) {
+  $('#servicedeletebtn').html("yes");
+            if(response.status == 200){
+              if (response.data == 1) {
                 $('#deletemodal').modal('hide');
-                toastr.success('DATA DELTE SUCCESSFUL');
-                getservicedata();
+                toastr.success('DATA DELETE SUCCESSFUL');
+                getservicedata();   //to reload page after (edit/delete) yes/save button 
             } else {
                 $('#deletemodal').modal('hide');
                 toastr.error('FAILED');
-                getservicedata();
+                getservicedata();   //to reload page after (edit/delete) yes/save button
             }
+            }else{
+                $('#deletemodal').modal('hide');
+                toastr.error('SomeThing Went Wrong');
+            }          
 
         }).catch(function(error) {
-
+            $('#deletemodal').modal('hide');
+            toastr.error('SomeThing Went Wrong');
         });
-
-
 }
 
-//Catch indivisual edit yes button function
+// service modal update save button click/press
+$('#serviceupdatebtn').click(function() {
+    var id = $('#serviceeditid').html();
+    var name = $('#titledetails').val();
+    var desc = $('#descriptiondetails').val();
+    var img = $('#imagedetails').val();
+    serviceupdatesave(id, name, desc, img);
+
+});
+
+//Catch indivisual edit icon button function
 
 function servicedetails(detailid) {
-
-
     axios.post('/editservice', {
             id: detailid
         })
         .then(function(response) {
+          
             if (response.status == 200) {
 
                 var dataJSON = response.data;
@@ -164,26 +151,123 @@ function servicedetails(detailid) {
             $('#serviceedittext').removeClass('d-none');
         });
 
+}
+
+//service modal save button indivisual edit function
+
+function serviceupdatesave(id, servicename, servicedesc, serviceimg) {
+
+    if (servicename == 0) {
+        toastr.error('Servicename Is Empty');
+
+    } else if (servicedesc == 0) {
+
+        toastr.error('Description Is Empty');
+
+    } else if (serviceimg == 0) {
+
+        toastr.error('Image Is Empty');
+
+    } else {
+  $('#serviceupdatebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+        axios.post('/editservicesave', {
+                id: id,
+                name: servicename,
+                desc: servicedesc,
+                img: serviceimg,
+            })
+            .then(function(response) {
+     $('#serviceupdatebtn').html("save");
+                if(response.status == 200){
+                  if (response.data == 1) {
+                    $('#editmodal').modal('hide');
+                    toastr.success('DATA UPDATE SUCCESSFUL');
+                    getservicedata();   //to reload page after (edit/delete) yes/save button
+                } else {
+                    $('#editmodal').modal('hide');
+                    toastr.error('DATA UPDATE FAILED');
+                    getservicedata();   //to reload page after (edit/delete) yes/save button
+                }
+
+                }else{
+                    $('#editmodal').modal('hide');
+                    toastr.error('SomeThing Went Wrong');
+                }
+
+            }).catch(function(error) {
+                $('#editmodal').modal('hide');
+                toastr.error('SomeThing Went Wrong');
+            });
+    }
 
 }
 
-//update after press save button
+//                             <=====insert section start=====>
 
-function serviceupdatepress(serviceid,servicename,servicedes,serviceimg) {
+// service add info sertion
 
+$('#serviceinsertbtn').click(function(){
 
-    axios.post('/serviceupdate', {
-            id: serviceid,
-            name: servicename,
-            desc: servicedes,
-            img: serviceimg,
-        })
-        .then(function(response) {
-         
+$('#formid').trigger('reset');
+$('#addmodal').modal('show');
 
-        }).catch(function(error) {
-         
-        });
+});
 
+// service modal insert save button click/press
+$('#serviceaddbtn').click(function() {
+    var id = $('#serviceinsertinput').html();
+    var name = $('#inserttitle').val();
+    var desc = $('#insertdescription').val();
+    var img = $('#insertimage').val();
+    serviceinsertsave(name, desc, img);
+
+});
+
+//service modal add button indivisual insert function
+
+function serviceinsertsave(servicename, servicedesc, serviceimg) {
+
+    if (servicename == 0) {
+        toastr.error('Servicename Is Empty');
+
+    } else if (servicedesc == 0) {
+
+        toastr.error('Description Is Empty');
+
+    } else if (serviceimg == 0) {
+
+        toastr.error('Image Is Empty');
+
+    } else {
+  $('#serviceaddbtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+        axios.post('/insertservicesave', {
+                name: servicename,
+                desc: servicedesc,
+                img: serviceimg,
+            })
+            .then(function(response) {
+     $('#serviceaddbtn').html("save");
+                if(response.status == 200){
+                  if (response.data == 1) {
+                    $('#addmodal').modal('hide');
+                    toastr.success('DATA UPDATE SUCCESSFUL');
+                    getservicedata();   //to reload page after (edit/delete) yes/save button
+
+                } else {
+                    $('#addmodal').modal('hide');
+                    toastr.error('DATA UPDATE FAILED');
+                    getservicedata();   //to reload page after (edit/delete) yes/save button
+                }
+
+                }else{
+                    $('#addmodal').modal('hide');
+                    toastr.error('SomeThing Went Wrong');
+                }
+
+            }).catch(function(error) {
+                $('#addmodal').modal('hide');
+                toastr.error('SomeThing Went Wrong');
+            });
+    }
 
 }
