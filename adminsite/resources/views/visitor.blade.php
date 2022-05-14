@@ -33,3 +33,20 @@
 
 
 @endsection
+
+@section('script')
+<script type="text/javascript">
+
+  // visitor blade section start
+
+$(document).ready(function() {
+    $('#VisitorDt').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+});
+
+
+// visitor blade section end
+
+
+</script>
+@endsection

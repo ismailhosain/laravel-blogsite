@@ -18,9 +18,23 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-devider mt-0" style="margin-bottom: 5px"></li>
-                        <li> <a href="index.html" ><span> <i class="fas fa-home"></i> </span><span class="hide-menu">Home</span></a></li>
-                        <li> <a href="{{url('/visitor')}}" ><span> <i class="fas fa-users"></i> </span><span class="hide-menu">Visitor</span></a></li>
-                    	<li> <a href="{{url('/service')}}" ><span> <i class="fas fa-globe"></i> </span><span class="hide-menu">Services</span></a></li>
+
+                            <!--home view-->
+
+                        <li> <a href="index.html" ><span><i class="fas fa-home"></i> </span><span class="hide-menu">Home</span></a></li>
+
+                             <!--visitor view-->
+
+                        <li> <a href="{{url('/visitor')}}" ><span><i class="fas fa-users"></i> </span><span class="hide-menu">Visitor</span></a></li>
+
+                             <!--service view-->
+
+                    	<li> <a href="{{url('/service')}}" ><span><i class="fas fa-globe"></i> </span><span class="hide-menu">Services</span></a></li>
+
+                            <!--course view-->
+
+                        <li> <a href="{{url('/course')}}" ><span><i class="fa-solid fa-file-pen"></i></span><span class="hide-menu">Courses</span></a></li>
+
 					</ul>
                 </nav>
             </div>

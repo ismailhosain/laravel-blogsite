@@ -1,41 +1,28 @@
-$(document).ready(function() {
-    $('#VisitorDt').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});
+// course js section start
+function getcoursesdata() { //this function call to service view in js tag
 
-function getservicedata() {   //this function call to service view in js tag
-
-    axios.get('/getservice')
+    axios.get('/getcourse')
         .then(function(response) {
 
             if (response.status == 200) {
 
-                $('#maindev').removeClass('d-none');
-                $('#imageload').addClass('d-none');
-                $('#service_id').empty();
+                $('#maincoursedev').removeClass('d-none');
+                $('#imagecourseload').addClass('d-none');
+                $('#course_id').empty();
 
                 var dataJSON = response.data;
                 $.each(dataJSON, function(i, item) {
                     $('<tr>').html(
 
-                        "<td>+<img class='table-img' src=" + dataJSON[i].service_img + "></td>" +
-                        "<td>" + dataJSON[i].service_name + "</td>" +
-                        "<td>" + dataJSON[i].service_des + "</td>" +
-                        "<td><a class='serviceeditsave' data-id=" + dataJSON[i].id + "><i class='fas fa-edit'></i></a></td>" +
-                        "<td><a data-toggle='modal' class='servicedeleteid' data-id=" + dataJSON[i].id + " data-target='#deletemodal'><i class='fas fa-trash-alt'></i></a></td>"
+        "<td class='th-sm'>" + dataJSON[i].course_name + "</td>" +
+        "<td class='th-sm'>" + dataJSON[i].course_des + "</td>" +
+        "<td class='th-sm'>" + dataJSON[i].course_fee + "</td>" +        
+        "<td><a class='coursedetailsbtn' data-id=" + dataJSON[i].id + "><i class='fa-solid fa-eye'></i></a></td>" +
+        "<td><a class='serviceeditsave' data-id=" + dataJSON[i].id + "><i class='fas fa-edit'></i></a></td>" +
+        "<td><a data-toggle='modal' class='coursedeletebtnid' data-id=" + dataJSON[i].id +"><i class='fas fa-trash-alt'></i></a></td>"
 
-                    ).appendTo('#service_id');
+                    ).appendTo('#course_id');
                 });
-
-                // service table delete icon click
-
-                $('.servicedeleteid').click(function() {
-
-                    var id = $(this).data('id');
-                    $('#servicedeleteid').html(id);
-                    $('#deletemodal').modal('show');
-
-                })
 
                 // service table edit icon click
 
@@ -48,6 +35,16 @@ function getservicedata() {   //this function call to service view in js tag
 
                 })
 
+                // delete button modal show click function start
+
+                $('.coursedeletebtnid').click(function(){
+                var id = $(this).data('id');
+                $('#coursedeleteid').html(id);
+                $("#coursedeletemodal").modal("show");
+
+})
+
+
                 // service table modal edit yes btn click
 
                 $('#serviceeditbtn').click(function() {
@@ -58,15 +55,15 @@ function getservicedata() {   //this function call to service view in js tag
 
             } else {
 
-                $('#imageload').addClass('d-none');
-                $('#wrongtext').removeClass('d-none');
+                $('#imagecourseload').addClass('d-none');
+                $('#coursewrongtext').removeClass('d-none');
 
             }
 
         }).catch(function(error) {
 
-            $('#imageload').addClass('d-none');
-            $('#wrongtext').removeClass('d-none');
+            $('#imagecourseload').addClass('d-none');
+            $('#coursewrongtext').removeClass('d-none');
 
         });
 
@@ -74,44 +71,46 @@ function getservicedata() {   //this function call to service view in js tag
 
 // service table modal delete modal yes btn click
 
-$('#servicedeletebtn').click(function() {
-    var id = $('#servicedeleteid').html();
-    servicedeleteaction(id); //to execute method from function
+$('#coursedeletebtn').click(function() {
+    var id = $('#coursedeleteid').html();
+    coursedeleteaction(id); //to execute method from function
 });
 
 //service modal delete yes button function
 
-function servicedeleteaction(deleteid) {
+function coursedeleteaction(deleteid) {
 
-  $('#servicedeletebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+    $('#coursedeletebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
 
-    axios.post('/deleteservice', {
+    axios.post('/deletecourse', {
             id: deleteid
         })
         .then(function(response) {
-  $('#servicedeletebtn').html("yes");
-            if(response.status == 200){
-              if (response.data == 1) {
-                $('#deletemodal').modal('hide');
-                toastr.success('DATA DELETE SUCCESSFUL');
-                getservicedata();   //to reload page after (edit/delete) yes/save button 
+            $('#coursedeletebtn').html("yes");
+            if (response.status == 200) {
+                if (response.data == 1) {
+                    $('#coursedeletemodal').modal('hide');
+                    toastr.success('DATA DELETE SUCCESSFUL');
+                    getcoursesdata(); //to reload page after (edit/delete) yes/save button 
+                } else {
+                    $('#coursedeletemodal').modal('hide');
+                    toastr.error('FAILED');
+                    getcoursesdata(); //to reload page after (edit/delete) yes/save button
+                }
             } else {
-                $('#deletemodal').modal('hide');
-                toastr.error('FAILED');
-                getservicedata();   //to reload page after (edit/delete) yes/save button
-            }
-            }else{
-                $('#deletemodal').modal('hide');
+                $('#coursedeletemodal').modal('hide');
                 toastr.error('SomeThing Went Wrong');
-            }          
+            }
 
         }).catch(function(error) {
-            $('#deletemodal').modal('hide');
+            $('#coursedeletemodal').modal('hide');
             toastr.error('SomeThing Went Wrong');
         });
 }
 
+
 // service modal update save button click/press
+
 $('#serviceupdatebtn').click(function() {
     var id = $('#serviceeditid').html();
     var name = $('#titledetails').val();
@@ -128,7 +127,7 @@ function servicedetails(detailid) {
             id: detailid
         })
         .then(function(response) {
-          
+
             if (response.status == 200) {
 
                 var dataJSON = response.data;
@@ -169,7 +168,7 @@ function serviceupdatesave(id, servicename, servicedesc, serviceimg) {
         toastr.error('Image Is Empty');
 
     } else {
-  $('#serviceupdatebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+        $('#serviceupdatebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
         axios.post('/editservicesave', {
                 id: id,
                 name: servicename,
@@ -177,19 +176,19 @@ function serviceupdatesave(id, servicename, servicedesc, serviceimg) {
                 img: serviceimg,
             })
             .then(function(response) {
-     $('#serviceupdatebtn').html("save");
-                if(response.status == 200){
-                  if (response.data == 1) {
-                    $('#editmodal').modal('hide');
-                    toastr.success('DATA UPDATE SUCCESSFUL');
-                    getservicedata();   //to reload page after (edit/delete) yes/save button
-                } else {
-                    $('#editmodal').modal('hide');
-                    toastr.error('DATA UPDATE FAILED');
-                    getservicedata();   //to reload page after (edit/delete) yes/save button
-                }
+                $('#serviceupdatebtn').html("save");
+                if (response.status == 200) {
+                    if (response.data == 1) {
+                        $('#editmodal').modal('hide');
+                        toastr.success('DATA UPDATE SUCCESSFUL');
+                        getservicedata(); //to reload page after (edit/delete) yes/save button
+                    } else {
+                        $('#editmodal').modal('hide');
+                        toastr.error('DATA UPDATE FAILED');
+                        getservicedata(); //to reload page after (edit/delete) yes/save button
+                    }
 
-                }else{
+                } else {
                     $('#editmodal').modal('hide');
                     toastr.error('SomeThing Went Wrong');
                 }
@@ -204,70 +203,91 @@ function serviceupdatesave(id, servicename, servicedesc, serviceimg) {
 
 //                             <=====insert section start=====>
 
-// service add info sertion
+// Course add info sertion to reload form
 
-$('#serviceinsertbtn').click(function(){
+$('#courseinsertbtn').click(function() {
 
-$('#formid').trigger('reset');
-$('#addmodal').modal('show');
-
-});
-
-// service modal insert save button click/press
-$('#serviceaddbtn').click(function() {
-    var id = $('#serviceinsertinput').html();
-    var name = $('#inserttitle').val();
-    var desc = $('#insertdescription').val();
-    var img = $('#insertimage').val();
-    serviceinsertsave(name, desc, img);
+    $('#courseformid').trigger('reset');
+    $('#addCourseModal').modal('show');
 
 });
 
-//service modal add button indivisual insert function
+// Course modal insert save button click/press
+$('#CourseAddConfirmBtn').click(function() {
+    var cname = $('#CourseNameId').val();
+    var cdes = $('#CourseDesId').val();
+    var cfee = $('#CourseFeeId').val();
+    var croll = $('#CourseEnrollId').val();
+    var cclass = $('#CourseClassId').val();
+    var clink = $('#CourseLinkId').val();
+    var cimg = $('#CourseImgId').val();
+    courseinsertsave(cname,cdes,cfee,croll,cclass,clink,cimg);
 
-function serviceinsertsave(servicename, servicedesc, serviceimg) {
+});
 
-    if (servicename == 0) {
-        toastr.error('Servicename Is Empty');
+//course modal add button indivisual insert function
 
-    } else if (servicedesc == 0) {
+function courseinsertsave(coursename,coursedes,coursefee,courseenroll,courseclass,courselink,courseimg) {
 
-        toastr.error('Description Is Empty');
+    if (coursename == 0) {
+        toastr.error('Coursename Is Empty');
+    }else if (coursedes == 0) {
+        toastr.error('CourseDescription Is Empty');
+    }else if (coursefee == 0) {
+        toastr.error('Coursefee Is Empty');
+    }else if (courseenroll == 0) {
+        toastr.error('Courseenroll Is Empty');
+    }else if (courseclass == 0) {
+        toastr.error('CourseClass Is Empty');
+    }else if (courselink == 0) {
+        toastr.error('CourseLink Is Empty');
+    }else if (courseimg == 0) {
+        toastr.error('CourseImage Is Empty');
+    }else {
+        $('#CourseAddConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+        axios.post('/insertcoursesave', {
+                cname: coursename,
+                cdesc: coursedes,
+                cfees: coursefee,
+                cenroll: courseenroll,
+                ctotalclass: courseclass,
+                clink: courselink,
+                cimg: courseimg,
+            }).then(function(response) {
+                $('#CourseAddConfirmBtn').html("save");
+                if (response.status == 200) {
+                    if (response.data == 1) {
+                        $('#addCourseModal').modal('hide');
+                        toastr.success('DATA INSERT SUCCESSFUL');
+                        getcoursesdata(); //to reload page after (edit/delete) yes/save button
 
-    } else if (serviceimg == 0) {
-
-        toastr.error('Image Is Empty');
-
-    } else {
-  $('#serviceaddbtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
-        axios.post('/insertservicesave', {
-                name: servicename,
-                desc: servicedesc,
-                img: serviceimg,
-            })
-            .then(function(response) {
-     $('#serviceaddbtn').html("save");
-                if(response.status == 200){
-                  if (response.data == 1) {
-                    $('#addmodal').modal('hide');
-                    toastr.success('DATA UPDATE SUCCESSFUL');
-                    getservicedata();   //to reload page after (edit/delete) yes/save button
+                    } else {
+                        $('#addCourseModal').modal('hide');
+                        toastr.error('DATA INSERT FAILED');
+                        getcoursesdata(); //to reload page after (edit/delete) yes/save button
+                    }
 
                 } else {
-                    $('#addmodal').modal('hide');
-                    toastr.error('DATA UPDATE FAILED');
-                    getservicedata();   //to reload page after (edit/delete) yes/save button
-                }
-
-                }else{
-                    $('#addmodal').modal('hide');
+                    $('#addCourseModal').modal('hide');
                     toastr.error('SomeThing Went Wrong');
                 }
 
             }).catch(function(error) {
-                $('#addmodal').modal('hide');
+                $('#addCourseModal').modal('hide');
                 toastr.error('SomeThing Went Wrong');
             });
     }
 
 }
+
+
+// insert button modal show click function start
+
+$("#courseinsertbtn").click(function(){
+
+$("#addCourseModal").modal("show");
+
+})
+
+
+

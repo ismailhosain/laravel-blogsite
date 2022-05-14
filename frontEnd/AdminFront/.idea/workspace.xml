@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e502691-db7b-4c44-9cb3-c8b75f96b528" name="Default Changelist" comment="" />
+    <list default="true" id="3e502691-db7b-4c44-9cb3-c8b75f96b528" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../adminsite/public/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../adminsite/public/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../adminsite/resources/views/layout/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../adminsite/resources/views/layout/menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../adminsite/resources/views/service.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../adminsite/resources/views/service.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../adminsite/resources/views/visitor.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../adminsite/resources/views/visitor.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../adminsite/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../adminsite/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../blogsite/app/Http/Controllers/homeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../blogsite/app/Http/Controllers/homeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../blogsite/resources/views/components/courses.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../blogsite/resources/views/components/courses.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -19,17 +25,26 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1aTpTgjI29McOGyd8ld7eV2FAWN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -39,6 +54,7 @@
       <recent name="C:\Users\Rabbil\PhpstormProjects\RabbilAdmin" />
     </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -50,10 +66,11 @@
       <option name="presentableId" value="Default" />
       <updated>1586769447541</updated>
       <workItem from="1586769448948" duration="1168000" />
+      <workItem from="1652243346779" duration="642000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
 </project>

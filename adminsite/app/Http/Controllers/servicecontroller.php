@@ -75,7 +75,6 @@ class servicecontroller extends Controller
 
   }  
 
-
     //add button service to insert code
 
    function serviceinsertbutton(Request $req){
