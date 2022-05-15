@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-12 p-5">
 <button id="serviceinsertbtn" class="btn btn-sm btn-primary my-3">ADD info</button>
-      <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <table id="servicedatatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
             <th class="th-sm">Image</th>
@@ -50,7 +50,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body p-5 text-center">
-        <h4 id="servicedeleteid" class="modal-title mx-auto"></h4>
+        <h4 id="servicedeleteid" class="modal-title mx-auto d-none"></h4>
         <h4 class="modal-title mx-auto text-danger" id="exampleModalLongTitle">Do You Want DELETE!!!</h4>
       </div>
       <div class="modal-footer">
@@ -71,7 +71,7 @@
     <div class="modal-content">
       <div id="serviceeditinput" class="modal-body p-5 text-center d-none">
         
-        <h4 id="serviceeditid" class="modal-title mx-auto"></h4>
+        <h4 id="serviceeditid" class="modal-title mx-auto d-none"></h4>
   
       <input id="titledetails" type="text"  class="form-control mb-3" placeholder="name" />
       <input id="descriptiondetails" type="text" class="form-control mb-3" placeholder="Description" />
@@ -80,8 +80,8 @@
 <img id="serviceeditload" src="{{asset('images/load.svg')}}" alt="image not found"  style="height: 150px;width: auto;">
 <h3 id="serviceedittext" class="mx-auto d-none p-4 text-danger">Something Wend Wrong:-)</h3>
       <div class="modal-footer">
-        <button data-id=" " id="serviceupdatebtn" type="button" class="btn btn-primary" data-dismiss="modal">save</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
+        <button data-id=" " id="serviceupdatebtn" type="button" class="btn btn-primary" data-dismiss="modal">save</button>
       </div>
     </div>
   </div>
@@ -131,6 +131,8 @@ function getservicedata() {   //this function call to service view in js tag
 
                 $('#maindev').removeClass('d-none');
                 $('#imageload').addClass('d-none');
+
+                $('#servicedatatable').DataTable().destroy();
                 $('#service_id').empty();
 
                 var dataJSON = response.data;
@@ -174,6 +176,9 @@ function getservicedata() {   //this function call to service view in js tag
                     serviceeditsection(id);
 
                 });
+
+                    $('#servicedatatable').DataTable({order:false});
+                    $('.dataTables_length').addClass('bs-select');
 
             } else {
 
@@ -360,7 +365,7 @@ function serviceinsertsave(servicename, servicedesc, serviceimg){ //random peram
     } else {
   $('#serviceaddbtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
         axios.post('/insertservicesave', {
-            name: servicename, //(controller input value:serviceinsertsave perameter value )
+            name: servicename, // (controller input value : serviceinsertsave perameter value )
             desc: servicedesc,
             img: serviceimg,
             })

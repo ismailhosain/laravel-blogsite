@@ -17,7 +17,7 @@ class servicecontroller extends Controller
   
   function getserviceindex(){
 
-    $result=json_decode(servicemodel::all());
+    $result=json_decode(servicemodel::orderby('id','desc')->get());
 
     return $result;
 

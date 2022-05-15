@@ -18,7 +18,7 @@ class coursecontroller extends Controller
 
     function getcourseindex()
     {
-    $result=json_decode(coursemodel::all());
+    $result=json_decode(coursemodel::orderby('id','desc')->get());
 
     return $result;
     }  
@@ -68,8 +68,8 @@ class coursecontroller extends Controller
     $cimg=$req->input('cimg');
 
 $result=coursemodel::where('id','=',$id)->update([
-    'course_name'=>$name,
-    'course_des'=>$desc,
+    'course_name'=>$cname,
+    'course_des'=>$cdesc,
     'course_fee'=>$cfees,
     'course_totalenroll'=>$cenroll,
     'course_totalclass'=>$ctotalclass,
