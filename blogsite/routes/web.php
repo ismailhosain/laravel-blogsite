@@ -18,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/','App\Http\Controllers\homecontroller@homeindex');
+
+//insert contact route 
+
+Route::post('/homecontact','App\Http\Controllers\homecontroller@contactinsertbutton');

@@ -7,7 +7,7 @@ use App\Models\visitormodel;
 use App\Models\servicemodel;
 use App\Models\coursemodel;
 use App\Models\projectmodel;
-
+use App\Models\contactmodel;
 
 class homeController extends Controller
 {
@@ -37,9 +37,27 @@ class homeController extends Controller
             'coursesdata'=>$coursesdata,
             'projectdata'=>$projectsdata
         
-        ]);
-
-               
+        ]);            
     
        }
+
+       //add button project to insert code
+   function contactinsertbutton(Request $req)
+   {
+    $contact_name=$req->input('contact_name');
+    $contact_mob=$req->input('contact_mob');
+    $contact_email=$req->input('contact_email');
+    $contact_msg=$req->input('contact_msg');    
+
+    $result=contactmodel::insert(['contact_name'=>$contact_name,'contact_mob'=>$contact_mob,'contact_email'=>$contact_email,'contact_msg'=>$contact_msg]);
+    
+    if($result==true){
+      return 1;
+    }else{
+      return 0;
+    }
+    }  
+
+
+     
 }

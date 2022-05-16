@@ -27,5 +27,9 @@
 
 <!--projects section end -->
 
+<!--contact section start -->
+@include('components.homecontact')
+<!--contact section end -->
+
 
 @endsection
