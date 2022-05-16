@@ -171,11 +171,11 @@ function getservicedata() {   //this function call to service view in js tag
 
                 // service table modal edit yes btn click
 
-                $('#serviceeditbtn').click(function() {
-                    var id = $('#serviceeditid').html();
-                    serviceeditsection(id);
+                // $('#serviceeditbtn').click(function() {
+                //     var id = $('#serviceeditid').html();
+                //     serviceeditsection(id);
 
-                });
+                // });
 
                     $('#servicedatatable').DataTable({order:false});
                     $('.dataTables_length').addClass('bs-select');

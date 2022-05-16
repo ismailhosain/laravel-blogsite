@@ -47,3 +47,20 @@ Route::post('/editcoursesave','App\Http\Controllers\coursecontroller@courseupdat
 //update save button click route for indivisual id
 Route::post('/insertcoursesave','App\Http\Controllers\coursecontroller@courseinsertbutton'); 
 //add save button click to insert data's
+
+
+
+//<=======admin project page controller setup======>
+
+Route::get('/project','App\Http\Controllers\projectcontroller@projectindex');
+
+Route::get('/getproject','App\Http\Controllers\projectcontroller@getprojectindex');
+
+Route::post('/deleteproject','App\Http\Controllers\projectcontroller@projectdelete'); 
+//delete route for indivisual id
+Route::post('/editproject','App\Http\Controllers\projectcontroller@projectdetails'); 
+//edit route for indivisual id
+Route::post('/editprojectsave','App\Http\Controllers\projectcontroller@projectupdatebutton'); 
+//update save button click route for indivisual id
+Route::post('/insertprojectsave','App\Http\Controllers\projectcontroller@projectinsertbutton'); 
+//add save button click to insert data's

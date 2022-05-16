@@ -3,7 +3,7 @@
         <h1 class="section-title">প্রজেক্ট</h1>
         <h1 class="section-subtitle">আইটি কোর্স, প্রজেক্ট ভিত্তিক সোর্স কোড সহ আরো যে সকল সার্ভিস আমরা প্রদান করি </h1>
         <div class="row">
-                   
+
             <div id="one"  class="owl-carousel mb-4 owl-theme">
                  @foreach($projectdata as $projectcontent)
                 <div class="item m-1 card">
@@ -11,7 +11,7 @@
                         <img class="w-100" src="{{$projectcontent->project_img}}" alt="Card image cap">
                         <h5 class="service-card-title mt-4">{{$projectcontent->project_name}}</h5>
                         <h6 class="service-card-subTitle p-0 m-0">{{$projectcontent->project_des}}</h6>
-                        <a href="{{$projectcontent->project_link}}" class="normal-btn-outline mt-2 mb-4 btn">বিস্তারিত</a> 
+                        <a target="_blank" href="{{$projectcontent->project_link}}" class="normal-btn-outline mt-2 mb-4 btn">বিস্তারিত</a> 
                     </div>
                 </div> 
                   @endforeach              

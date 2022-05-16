@@ -1,114 +1,113 @@
 // course js section start
-function getcoursesdata() { //this function call to service view in js tag
+function getprojectdata() { //this function call to service view in js tag
 
-    axios.get('/getcourse')
+    axios.get('/getproject')
         .then(function(response) {
 
             if (response.status == 200) {
 
-                $('#maincoursedev').removeClass('d-none');
-                $('#imagecourseload').addClass('d-none');
+                $('#mainprojectdev').removeClass('d-none');
+                $('#imageprojectload').addClass('d-none');
 
-                $('#coursedatatable').DataTable().destroy();
-                $('#course_id').empty();
-
+                $('#projectdatatable').DataTable().destroy();
+                $('#project_id').empty();
                 var dataJSON = response.data;
                 $.each(dataJSON, function(i, item) {
                     $('<tr>').html(
 
-                        "<td class='th-sm'>" + dataJSON[i].course_name + "</td>" +
-                        "<td class='th-sm'>" + dataJSON[i].course_fee + "</td>" +
-                        "<td class='th-sm'>" + dataJSON[i].course_totalenroll + "</td>" +
-                        "<td class='th-sm'>" + dataJSON[i].course_totalclass + "</td>" +
-                        "<td><a class='courseeditsave' data-id=" + dataJSON[i].id + "><i class='fas fa-edit'></i></a></td>" +
-                        "<td><a data-toggle='modal' class='coursedeletebtnid' data-id=" + dataJSON[i].id + "><i class='fas fa-trash-alt'></i></a></td>"
+                        "<td class='th-sm'>" + dataJSON[i].project_name + "</td>" +
+                        "<td class='th-sm'>" + dataJSON[i].project_des + "</td>" +
+                        "<td class='th-sm'>" + dataJSON[i].project_link + "</td>" +
+                        "<td class='th-sm'>" + dataJSON[i].project_img + "</td>" +
+                        "<td><a class='projecteditsave' data-id=" + dataJSON[i].id + "><i class='fas fa-edit'></i></a></td>" +
+                        "<td><a data-toggle='modal' class='projectdeletebtnid' data-id=" + dataJSON[i].id + "><i class='fas fa-trash-alt'></i></a></td>"
 
-                    ).appendTo('#course_id');
+                    ).appendTo('#project_id');
                 });
 
                 // course table edit icon click
 
-                $('.courseeditsave').click(function() {
+                $('.projecteditsave').click(function() {
 
                     var id = $(this).data('id');
-                    $('#courseeditid').html(id);
-                    coursedetails(id);
-                    $('#updateCourseModal').modal('show');
+                    $('#projecteditid').html(id);
+                    projectdetails(id);
+                     $('#updateprojectModal').modal('show');
 
                 })
 
-                // delete button modal show click function start
+                // // delete button modal show click function start
 
-                $('.coursedeletebtnid').click(function() {
+                $('.projectdeletebtnid').click(function() {
                     var id = $(this).data('id');
-                    $('#coursedeleteid').html(id);
-                    $("#coursedeletemodal").modal("show");
+                    $('#projectdeleteid').html(id);
+                    $("#projectdeletemodal").modal("show");
 
                 })
 
 
-                // course table modal edit yes btn click
+                // // project table modal edit yes btn click
 
-                $('#serviceeditbtn').click(function() {
-                    var id = $('#serviceeditid').html();
-                    serviceeditsection(id);
+                // $('#projectupdateConfirmBtn').click(function() {
+                //     var id = $('#projecteditid').html();
+                //     serviceeditsection(id);
 
-                });
+                // });
 
-                $('#coursedatatable').DataTable({order:false});
+                $('#projectdatatable').DataTable({order:false});
                 $('.dataTables_length').addClass('bs-select');
 
             } else {
 
-                $('#imagecourseload').addClass('d-none');
-                $('#coursewrongtext').removeClass('d-none');
+                $('#imageprojectload').addClass('d-none');
+                $('#projectwrongtext').removeClass('d-none');
 
             }
 
         }).catch(function(error) {
 
-            $('#imagecourseload').addClass('d-none');
-            $('#coursewrongtext').removeClass('d-none');
+            $('#imageprojectload').addClass('d-none');
+            $('#projectwrongtext').removeClass('d-none');
 
         });
 
 }
 
-// course table modal delete modal yes btn click
+// project table modal delete modal yes btn click
 
-$('#coursedeletebtn').click(function() {
-    var id = $('#coursedeleteid').html();
-    coursedeleteaction(id); //to execute method from function
+$('#projectdeletebtn').click(function() {
+    var id = $('#projectdeleteid').html();
+    projectdeleteaction(id); //to execute method from function
 });
 
-//course modal delete yes button function
+//project modal delete yes button function
 
-function coursedeleteaction(deleteid) {
+function projectdeleteaction(deleteid) {
 
-    $('#coursedeletebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+    $('#projectdeletebtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
 
-    axios.post('/deletecourse', {
+    axios.post('/deleteproject', {
             id: deleteid
         })
         .then(function(response) {
-            $('#coursedeletebtn').html("yes");
+            $('#projectdeletebtn').html("yes");
             if (response.status == 200) {
                 if (response.data == 1) {
-                    $('#coursedeletemodal').modal('hide');
+                    $('#projectdeletemodal').modal('hide');
                     toastr.success('DATA DELETE SUCCESSFUL');
-                    getcoursesdata(); //to reload page after (edit/delete) yes/save button 
+                    getprojectdata(); //to reload page after (edit/delete) yes/save button 
                 } else {
-                    $('#coursedeletemodal').modal('hide');
+                    $('#projectdeletemodal').modal('hide');
                     toastr.error('FAILED');
-                    getcoursesdata(); //to reload page after (edit/delete) yes/save button
+                    getprojectdata(); //to reload page after (edit/delete) yes/save button
                 }
             } else {
-                $('#coursedeletemodal').modal('hide');
+                $('#projectdeletemodal').modal('hide');
                 toastr.error('SomeThing Went Wrong');
             }
 
         }).catch(function(error) {
-            $('#coursedeletemodal').modal('hide');
+            $('#projectdeletemodal').modal('hide');
             toastr.error('SomeThing Went Wrong');
         });
 }
@@ -117,8 +116,8 @@ function coursedeleteaction(deleteid) {
 
 //Catch indivisual edit icon button function
 
-function coursedetails(detailid) {
-    axios.post('/editcourse', {
+function projectdetails(detailid) {
+    axios.post('/editproject', {
             id: detailid
         })
         .then(function(response) {
@@ -127,109 +126,88 @@ function coursedetails(detailid) {
 
                 var dataJSON = response.data;
 
-                $('#courseeditinput').removeClass('d-none');
-                $('#courseeditload').addClass('d-none');
+                $('#projecteditinput').removeClass('d-none');
+                $('#projecteditload').addClass('d-none');
 
-                $('#CourseupdateNameId').val(dataJSON[0].course_name);
-                $('#CourseupdateDesId').val(dataJSON[0].course_des);
-                $('#CourseupdateFeeId').val(dataJSON[0].course_fee);
-                $('#CourseupdateEnrollId').val(dataJSON[0].course_totalenroll);
-                $('#CourseupdateClassId').val(dataJSON[0].course_totalclass);
-                $('#CourseupdateLinkId').val(dataJSON[0].course_link);
-                $('#CourseupdateImgId').val(dataJSON[0].course_img);
+                $('#projectupdateNameId').val(dataJSON[0].project_name);
+                $('#projectupdateDesId').val(dataJSON[0].project_des);
+                $('#projectupdatelink').val(dataJSON[0].project_link);
+                $('#projectupdateimg').val(dataJSON[0].project_img);                
 
             } else {
-                $('#courseeditload').addClass('d-none');
-                $('#courseedittext').removeClass('d-none');
+                $('#projecteditload').addClass('d-none');
+                $('#projectedittext').removeClass('d-none');
 
             }
 
         }).catch(function(error) {
-            $('#courseeditload').addClass('d-none');
-            $('#courseedittext').removeClass('d-none');
+            $('#projecteditload').addClass('d-none');
+            $('#projectedittext').removeClass('d-none');
         });
 
 }
 
 
-// course modal update save button click/press
+// project modal update save button click/press
 
-$('#CourseupdateConfirmBtn').click(function() {
-    var id = $('#courseeditid').html();
-    var c_name = $('#CourseupdateNameId').val();
-    var c_desc = $('#CourseupdateDesId').val();
-    var c_fees = $('#CourseupdateFeeId').val();
-    var c_enroll = $('#CourseupdateEnrollId').val();
-    var c_class = $('#CourseupdateClassId').val();
-    var c_link = $('#CourseupdateLinkId').val();
-    var c_img = $('#CourseupdateImgId').val();
-    courseupdatesave(id, c_name, c_desc, c_fees, c_enroll, c_class, c_link, c_img);
+$('#projectupdateConfirmBtn').click(function() {
+    var id = $('#projecteditid').html();
+    var p_name = $('#projectupdateNameId').val();
+    var p_desc = $('#projectupdateDesId').val();
+    var p_link = $('#projectupdatelink').val();
+    var p_img = $('#projectupdateimg').val();    
+    projectupdatesave(id, p_name, p_desc, p_link, p_img);
 
 });
 
 //course modal save button indivisual edit function
 
-function courseupdatesave(id, coursename, coursedes, coursefee, coursetotalenroll, coursetotalclass, courselink, courseimg) {
+function projectupdatesave(id, projectname, projectdes, projectlink, projectimg) {
 
-    if (coursename == 0) {
-        toastr.error('Coursename Is Empty');
+    if (projectname == 0) {
+        toastr.error('Projectname Is Empty');
 
-    } else if (coursedes == 0) {
+    } else if (projectdes == 0) {
 
         toastr.error('Description Is Empty');
 
-    } else if (coursefee == 0) {
+    } else if (projectlink == 0) {
 
-        toastr.error('CourseFee Is Empty');
+        toastr.error('ProjectLink Is Empty');
 
-    } else if (coursetotalenroll == 0) {
+    } else if (projectimg == 0) {
 
-        toastr.error('CourseEnroll Is Empty');
+        toastr.error('ProjectImage Is Empty');
 
-    } else if (coursetotalclass == 0) {
-
-        toastr.error('CourseClass Is Empty');
-
-    } else if (courselink == 0) {
-
-        toastr.error('CourseLink Is Empty');
-
-    } else if (courseimg == 0) {
-
-        toastr.error('CourseImg Is Empty');
-
-    } else {
-        $('#CourseupdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
-        axios.post('/editcoursesave', {
+    }else {
+        $('#projectupdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+        axios.post('/editprojectsave', {
                 id: id,
-                cname: coursename,
-                cdesc: coursedes,
-                cfees: coursefee,
-                cenroll: coursetotalenroll,
-                ctotalclass: coursetotalclass,
-                clink: courselink,
-                cimg: courseimg,
+                pname: projectname,
+                pdesc: projectdes,
+                plink: projectlink,
+                pimg: projectimg,                
             })
             .then(function(response) {
-                $('#CourseupdateConfirmBtn').html("save");
+                $('#projectupdateConfirmBtn').html("save");
                 if (response.status == 200) {
                     if (response.data == 1) {
-                        $('#updateCourseModal').modal('hide');
+                        $('#updateprojectModal').modal('hide');
                         toastr.success('DATA UPDATE SUCCESSFUL');
-                        getcoursesdata(); //to reload page after (edit/delete) yes/save button
+                        getprojectdata(); //to reload page after (edit/delete) yes/save button
                     } else {
-                        $('#updateCourseModal').modal('hide');
+                        $('#updateprojectModal').modal('hide');
                         toastr.error('DATA UPDATE FAILED');
-                        getcoursesdata(); //to reload page after (edit/delete) yes/save button
+                        getprojectdata(); //to reload page after (edit/delete) yes/save button
                     }
 
                 } else {
-                    $('#updateCourseModal').modal('hide');
+                    $('#updateprojectModal').modal('hide');
                     toastr.error('SomeThing Went Wrong');
                 }
 
             }).catch(function(error) {
-                $('#updateCourseModal').modal('hide');
+                $('#updateprojectModal').modal('hide');
                 toastr.error('SomeThing Went Wrong');
             });
     }
@@ -238,77 +216,65 @@ function courseupdatesave(id, coursename, coursedes, coursefee, coursetotalenrol
 
 //                             <=====insert section start=====>
 
-// Course add info sertion to reload form
+// project add info sertion to reload form
 
-$('#courseinsertbtn').click(function() {
+$('#projectinsertbtn').click(function() {
 
-    $('#courseformid').trigger('reset');
-    $('#addCourseModal').modal('show');
-
-});
-
-// Course modal insert save button click/press
-$('#CourseAddConfirmBtn').click(function() {
-    var cname = $('#CourseNameId').val();
-    var cdes = $('#CourseDesId').val();
-    var cfee = $('#CourseFeeId').val();
-    var croll = $('#CourseEnrollId').val();
-    var cclass = $('#CourseClassId').val();
-    var clink = $('#CourseLinkId').val();
-    var cimg = $('#CourseImgId').val();
-    courseinsertsave(cname, cdes, cfee, croll, cclass, clink, cimg);
+    $('#projectformid').trigger('reset');
+    $('#addprojectModal').modal('show');
 
 });
 
-//course modal add button indivisual insert function
+// project modal insert save button click/press
+$('#projectAddConfirmBtn').click(function() {
+    var pname = $('#projectNameId').val();
+    var pdes = $('#projectDesId').val();
+    var plink = $('#projectlinkId').val();
+    var pimg = $('#projectimgid').val();  
+    projectinsertsave(pname,pdes,plink,pimg);
 
-function courseinsertsave(coursename, coursedes, coursefee, courseenroll, courseclass, courselink, courseimg) {
+});
 
-    if (coursename == 0) {
-        toastr.error('Coursename Is Empty');
-    } else if (coursedes == 0) {
-        toastr.error('CourseDescription Is Empty');
-    } else if (coursefee == 0) {
-        toastr.error('Coursefee Is Empty');
-    } else if (courseenroll == 0) {
-        toastr.error('Courseenroll Is Empty');
-    } else if (courseclass == 0) {
-        toastr.error('CourseClass Is Empty');
-    } else if (courselink == 0) {
-        toastr.error('CourseLink Is Empty');
-    } else if (courseimg == 0) {
-        toastr.error('CourseImage Is Empty');
-    } else {
-        $('#CourseAddConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
-        axios.post('/insertcoursesave', {
-            cname: coursename,
-            cdesc: coursedes,
-            cfees: coursefee,
-            cenroll: courseenroll,
-            ctotalclass: courseclass,
-            clink: courselink,
-            cimg: courseimg,
+//project modal add button indivisual insert function
+
+function projectinsertsave(projectname,projectdes,projectlink, projectimg) {
+
+    if (projectname == 0) {
+        toastr.error('Projectname Is Empty');
+    } else if (projectdes == 0) {
+        toastr.error('ProjectDescription Is Empty');
+    } else if (projectlink == 0) {
+        toastr.error('ProjectLink Is Empty');
+    } else if (projectimg == 0) {
+        toastr.error('ProjectImage Is Empty');
+    }  else {
+        $('#projectAddConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+        axios.post('/insertprojectsave', {
+            pname: projectname,
+            pdesc: projectdes,
+            plink: projectlink,
+            pimg: projectimg,           
         }).then(function(response) {
-            $('#CourseAddConfirmBtn').html("save");
+            $('#projectAddConfirmBtn').html("save");
             if (response.status == 200) {
                 if (response.data == 1) {
-                    $('#addCourseModal').modal('hide');
+                    $('#addprojectModal').modal('hide');
                     toastr.success('DATA INSERT SUCCESSFUL');
-                    getcoursesdata(); //to reload page after (edit/delete) yes/save button
+                    getprojectdata(); //to reload page after (edit/delete) yes/save button
 
                 } else {
-                    $('#addCourseModal').modal('hide');
+                    $('#addprojectModal').modal('hide');
                     toastr.error('DATA INSERT FAILED');
-                    getcoursesdata(); //to reload page after (edit/delete) yes/save button
+                    getprojectdata(); //to reload page after (edit/delete) yes/save button
                 }
 
             } else {
-                $('#addCourseModal').modal('hide');
+                $('#addprojectModal').modal('hide');
                 toastr.error('SomeThing Went Wrong');
             }
 
         }).catch(function(error) {
-            $('#addCourseModal').modal('hide');
+            $('#addprojectModal').modal('hide');
             toastr.error('SomeThing Went Wrong');
         });
     }
@@ -318,8 +284,8 @@ function courseinsertsave(coursename, coursedes, coursefee, courseenroll, course
 
 // insert button modal show click function start
 
-$("#courseinsertbtn").click(function() {
+$("#projectinsertbtn").click(function() {
 
-    $("#addCourseModal").modal("show");
+    $("#addprojectModal").modal("show");
 
 })
