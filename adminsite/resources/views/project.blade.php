@@ -51,7 +51,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Course</h5>
+                    <h5 class="modal-title">Add New project</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -104,7 +104,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Course</h5>
+                    <h5 class="modal-title">Add New project</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -139,7 +139,7 @@
 <script type="text/javascript">
 getprojectdata()  //this is for (custom js's) main function which is called here to execute js function
 
-// course js section start
+// project js section start
 function getprojectdata() { //this function call to service view in js tag
 
     axios.get('/getproject')
@@ -166,7 +166,7 @@ function getprojectdata() { //this function call to service view in js tag
                     ).appendTo('#project_id');
                 });
 
-                // course table edit icon click
+                // project table edit icon click
 
                 $('.projecteditsave').click(function() {
 
@@ -301,7 +301,7 @@ $('#projectupdateConfirmBtn').click(function() {
 
 });
 
-//course modal save button indivisual edit function
+//project modal save button indivisual edit function
 
 function projectupdatesave(id, projectname, projectdes, projectlink, projectimg) {
 
