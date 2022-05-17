@@ -64,3 +64,12 @@ Route::post('/editprojectsave','App\Http\Controllers\projectcontroller@projectup
 //update save button click route for indivisual id
 Route::post('/insertprojectsave','App\Http\Controllers\projectcontroller@projectinsertbutton'); 
 //add save button click to insert data's
+
+// <=======frontpage contact controller setup======>
+
+Route::get('/contact','App\Http\Controllers\contactcontroller@contacttindex');
+//
+Route::get('/getcontact','App\Http\Controllers\contactcontroller@getcontactindex');
+
+Route::post('/deletecontact','App\Http\Controllers\contactcontroller@contactdelete'); 
+//delete route for indivisual id

@@ -59,7 +59,6 @@ $(document).ready(function() {
 // contact send js function
 
 
-
 // contact modal insert save button click/press
 $('#contactconfirmbtn').click(function() {
     var cname = $('#contactname').val();
@@ -73,18 +72,60 @@ $('#contactconfirmbtn').click(function() {
 //contact modal add button indivisual insert function
 
 function contactinsertsave(contactname,contactnum,contactemail, contactmsg) {
+
+
+    if(contactname.length == 0){
+        $('#contactconfirmbtn').html('নাম লিখুন');
+         setTimeout(function(){ 
+            $('#contactconfirmbtn').html('পাঠিয়ে দিন') ; }, 2000);
+    }else if(contactnum.length == 0){
+         $('#contactconfirmbtn').html('নাম্বার লিখুন');
+          setTimeout(function(){ 
+            $('#contactconfirmbtn').html('পাঠিয়ে দিন') ; }, 2000);
+    }else if(contactemail.length == 0){
+         $('#contactconfirmbtn').html('ইমেইল লিখুন');
+          setTimeout(function(){ 
+            $('#contactconfirmbtn').html('পাঠিয়ে দিন') ; }, 2000);
+    }else if(contactmsg.length == 0){
+         $('#contactconfirmbtn').html('মেসেজ লিখুন');
+          setTimeout(function(){ 
+            $('#contactconfirmbtn').html('পাঠিয়ে দিন') ; }, 2000);
+    }else{
         axios.post('/homecontact', {
             contact_name: contactname,
             contact_mob: contactnum,
             contact_email: contactemail,
             contact_msg: contactmsg,           
         }).then(function(response) {
-            
-            alert("inserted")
+
+            if(response.status == 200){
+                if(response.data == 1){
+                 $('#contactconfirmbtn').html('অনুরোধ সফল হয়েছে');
+                 setTimeout(function(){ 
+                 $('#contactconfirmbtn').html('পাঠিয়ে দিন') ; }, 1000);   
+                   setTimeout( function() { 
+                    window.location = "http://127.0.0.1:8000/" }, 1000 );          
+
+            }else{
+                $('#contactconfirmbtn').html('অনুরোধ ব্যর্থ হয়েছে।আবার চেষ্টা করুন।');
+                 setTimeout(function(){ 
+                 $('#contactconfirmbtn').html('পাঠিয়ে দিন') ; }, 2000);
+            }}else{
+
+                $('#contactconfirmbtn').html('অনুরোধ ব্যর্থ হয়েছে।আবার চেষ্টা করুন।');
+                 setTimeout(function(){ 
+                 $('#contactconfirmbtn').html('পাঠিয়ে দিন') ; }, 2000);
+            }
+                  
 
         }).catch(function(error) {
-          
+                 $('#contactconfirmbtn').html('আবার চেষ্টা করুন।');
+                 setTimeout(function(){ 
+                 $('#contactconfirmbtn').html('পাঠিয়ে দিন') ; }, 2000);
         });
+
+    }
+       
     }
 
 

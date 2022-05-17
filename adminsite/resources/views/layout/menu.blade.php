@@ -39,6 +39,11 @@
 
                         <li><a href="{{url('/project')}}" ><span><i class="fa-solid fa-code"></i></span><span class="hide-menu">Projects</span></a></li>
 
+                         <!-- contact view -->
+
+                        <li><a href="{{url('/contact')}}" ><span><i class="fa-solid fa-address-card"></i></span><span class="hide-menu">Contact</span></a></li>
+
+
 					</ul>
                 </nav>
             </div>
