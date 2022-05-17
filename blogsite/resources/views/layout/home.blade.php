@@ -31,5 +31,9 @@
 @include('components.homecontact')
 <!--contact section end -->
 
+<!--testimonial section start -->
+@include('components.testimonial')
+<!--testimonial section end -->
+
 
 @endsection

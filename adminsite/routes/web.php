@@ -73,3 +73,20 @@ Route::get('/getcontact','App\Http\Controllers\contactcontroller@getcontactindex
 
 Route::post('/deletecontact','App\Http\Controllers\contactcontroller@contactdelete'); 
 //delete route for indivisual id
+
+
+
+//<=======admin review page controller setup======>
+
+Route::get('/review','App\Http\Controllers\reviewcontroller@reviewindex');
+
+Route::get('/getreview','App\Http\Controllers\reviewcontroller@getreviewindex');
+
+Route::post('/deletereview','App\Http\Controllers\reviewcontroller@reviewdelete'); 
+//delete route for indivisual id
+Route::post('/editreview','App\Http\Controllers\reviewcontroller@reviewdetails'); 
+//edit route for indivisual id
+Route::post('/editreviewsave','App\Http\Controllers\reviewcontroller@reviewupdatebutton'); 
+//update save button click route for indivisual id
+Route::post('/insertreviewsave','App\Http\Controllers\reviewcontroller@reviewinsertbutton'); 
+//add save button click to insert data's

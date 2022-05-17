@@ -8,6 +8,8 @@ use App\Models\servicemodel;
 use App\Models\coursemodel;
 use App\Models\projectmodel;
 use App\Models\contactmodel;
+use App\Models\reviewmodel;
+
 
 class homeController extends Controller
 {
@@ -29,19 +31,24 @@ class homeController extends Controller
         // project data select query
 
         $projectsdata=json_decode(projectmodel::orderby('id','desc')->limit(6)->get());
+
+         // review data select query
+
+        $reviewsdata=json_decode(reviewmodel::orderby('id','desc')->limit(6)->get());
         
         // services,courses and projects data return view
                  
         return view('layout/home',[
             'servicedata'=>$servicedata,
             'coursesdata'=>$coursesdata,
-            'projectdata'=>$projectsdata
+            'projectdata'=>$projectsdata,
+            'reviewdata'=>$reviewsdata,
         
         ]);            
     
        }
 
-       //add button project to insert code
+       //add button contact to insert code
    function contactinsertbutton(Request $req)
    {
     $contact_name=$req->input('contact_name');

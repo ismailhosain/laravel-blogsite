@@ -43,6 +43,10 @@
 
                         <li><a href="{{url('/contact')}}" ><span><i class="fa-solid fa-address-card"></i></span><span class="hide-menu">Contact</span></a></li>
 
+                         <!-- review view -->
+
+                        <li><a href="{{url('/review')}}" ><span><i class="fa-solid fa-address-card"></i></span><span class="hide-menu">Review</span></a></li>
+
 
 					</ul>
                 </nav>
