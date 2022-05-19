@@ -38,7 +38,7 @@ class homeController extends Controller
         
         // services,courses and projects data return view
                  
-        return view('layout/home',[
+        return view('home',[
             'servicedata'=>$servicedata,
             'coursesdata'=>$coursesdata,
             'projectdata'=>$projectsdata,

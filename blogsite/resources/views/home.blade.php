@@ -1,5 +1,5 @@
 @extends('layout.app')
-
+@section('title','Home')
 
 @section('content')
 
@@ -34,6 +34,7 @@
 <!--testimonial section start -->
 @include('components.testimonial')
 <!--testimonial section end -->
+
 
 
 @endsection

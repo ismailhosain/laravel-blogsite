@@ -21,7 +21,7 @@
 
                             <!--home view-->
 
-                        <li><a href="index.html" ><span><i class="fas fa-home"></i> </span><span class="hide-menu">Home</span></a></li>
+                        <li><a href="{{url('/home')}}" ><span><i class="fas fa-home"></i> </span><span class="hide-menu">Home</span></a></li>
 
                              <!--visitor view-->
 
