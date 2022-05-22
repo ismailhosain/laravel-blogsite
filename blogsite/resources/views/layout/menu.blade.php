@@ -18,6 +18,7 @@
             <li class="nav-item">
                 <a class="nav-link nav-font" href="{{url('/contact')}}">যোগাযোগ</a>
             </li>
-        </ul>       
+        </ul>  
+           
     </div>
 </nav>

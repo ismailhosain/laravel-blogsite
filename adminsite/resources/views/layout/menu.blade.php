@@ -8,7 +8,7 @@
                      <li class="nav-item mt-3">ADMIN</li>
 					</ul>
                     <ul class="navbar-nav my-lg-0">
-                        <li class="nav-item"><a href="" class="btn btn-sm btn-danger">Logout</a></li>
+                        <li class="nav-item"><a href="{{url('/logout')}}" class="btn btn-sm btn-danger">Logout</a></li>
                     </ul>
                 </div>
             </nav>
@@ -21,7 +21,7 @@
 
                             <!--home view-->
 
-                        <li><a href="{{url('/home')}}" ><span><i class="fas fa-home"></i> </span><span class="hide-menu">Home</span></a></li>
+                        <li><a href="{{url('/')}}" ><span><i class="fas fa-home"></i> </span><span class="hide-menu">Home</span></a></li>
 
                              <!--visitor view-->
 
@@ -45,7 +45,10 @@
 
                          <!-- review view -->
 
-                        <li><a href="{{url('/review')}}" ><span><i class="fa-solid fa-address-card"></i></span><span class="hide-menu">Review</span></a></li>
+                        <li><a href="{{url('/review')}}" ><span><i class="fa-solid fa-comments"></i></span><span class="hide-menu">Review</span></a></li> 
+                         <!-- review view -->
+
+                        <li><a href="{{url('/photo')}}" ><span><i class="fa-solid fa-photo-film"></i></span><span class="hide-menu">Photo Gallery</span></a></li>
 
 
 					</ul>
