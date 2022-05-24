@@ -5,3 +5,11 @@ padding: 1% 1% 1% 1% ;
 	width:60px;
 	height:auto;
 }
+
+#imgpreview{
+	border: none;
+	object-fit: cover;
+	width: 60%;
+	height: 320px;
+
+}

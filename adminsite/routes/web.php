@@ -92,3 +92,5 @@ Route::get('/logout','App\Http\Controllers\logincontroller@onlogout');
 
 
 Route::get('/photo','App\Http\Controllers\photocontroller@photoindex')->middleware('logincheck');
+
+Route::post('/photoupload','App\Http\Controllers\photocontroller@photoupload')->middleware('logincheck');
