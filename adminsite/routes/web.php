@@ -88,9 +88,11 @@ Route::post('/onlogin','App\Http\Controllers\logincontroller@onlogin');
 
 Route::get('/logout','App\Http\Controllers\logincontroller@onlogout');
 
-//<=======admin Photo Gallery page controller setup======>
 
+//<=======admin Photo Gallery page controller setup======>
 
 Route::get('/photo','App\Http\Controllers\photocontroller@photoindex')->middleware('logincheck');
 
 Route::post('/photoupload','App\Http\Controllers\photocontroller@photoupload')->middleware('logincheck');
+
+Route::get('/photoselect','App\Http\Controllers\photocontroller@photoselect')->middleware('logincheck');

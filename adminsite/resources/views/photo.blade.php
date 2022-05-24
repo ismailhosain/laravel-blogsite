@@ -34,6 +34,23 @@
 </div>
 <!-- add modal end -->
 
+<div class="container-fluid">
+    <div class="row" id="photoid">
+
+    </div>
+</div>
+
+<!-- loader start -->
+<div id="galleryload" class="container">
+    <div class="row">
+        <div class="col-md-12 p-5 text-center">
+            <img src="{{asset('images/load.svg')}}" alt="image not found">
+        </div>
+    </div>
+</div>
+<!-- loader end -->
+
+
 @endsection
 @section('script')
 
@@ -82,6 +99,27 @@ $('#photosave').on('click',function() {
 })
 
 
+photoload()
+function photoload(){
+
+axios.get('/photoselect').then(function(response){
+
+    $('#galleryload').addClass('d-none');
+$.each(response.data, function(i, item) {
+                    $("<div class='col-md-4 p-2'>").html(
+
+                      "<img class='photoshow img-thumbnail' src="+item['location']+" >"  
+
+                    ).appendTo('#photoid');
+                });
+
+
+
+}).catch(function(error){
+
+})
+
+}
 
 
 

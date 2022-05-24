@@ -13,6 +13,12 @@ class photocontroller extends Controller
     return view('/photo');
    }
 
+
+   function photoselect(){
+     $result= photomodel::all();
+     return $result;
+   }
+
   function photoupload(Request $req){
 
    $photoindex=$req->file('photo')->store('public');
