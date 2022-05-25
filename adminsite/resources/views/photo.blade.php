@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="col-md-12 p-5">
+<div class="col-md-12 pt-3">
 	<button id="photoinsertbtn" class="btn btn-sm btn-primary my-3">ADD info</button>
 	
 </div>
@@ -35,10 +35,15 @@
 <!-- add modal end -->
 
 <div class="container-fluid">
-    <div class="row" id="photoid">
+    <div class="row" id="photoloadid">
 
     </div>
+    <button class="btn btn-primary" id="loadmore">Load More</button>
 </div>
+
+
+
+
 
 <!-- loader start -->
 <div id="galleryload" class="container">
@@ -56,75 +61,109 @@
 
 <script type="text/javascript">
 
-$('#imginput').change(function(){
+$('#imginput').change(function() {
 
-	var reader=new FileReader();
+    var reader = new FileReader();
 
-	reader.readAsDataURL(this.files[0]);
+    reader.readAsDataURL(this.files[0]);
 
-	reader.onload=function(event){
+    reader.onload = function(event) {
 
-	var imgpath= event.target.result;
+        var imgpath = event.target.result;
 
-		$('#imgpreview').attr('src',imgpath);
+        $('#imgpreview').attr('src', imgpath);
 
-	}
+    }
 })
 
-
-$('#photosave').on('click',function() {
+$('#photosave').on('click', function() {
     $('#photosave').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
 
-    var photoindex=$('#imginput').prop('files')[0];
+    var photoindex = $('#imginput').prop('files')[0];
 
-    var formdata=new FormData();
+    var formdata = new FormData();
 
-    formdata.append('photo',photoindex);
+    formdata.append('photo', photoindex);
 
-  axios.post('/photoupload',formdata).then(function(response){
-            $('#photosave').html("save");
-    if(response.status == 200 && response.data == 1){
-              $('#addphotoModal').modal('hide');
+    axios.post('/photoupload', formdata).then(function(response) {
+        $('#photosave').html("save");
+        if (response.status == 200 && response.data == 1) {
+            $('#addphotoModal').modal('hide');
             toastr.success('PHOTO UPLOADED');
-    }else{
-        $('#addphotoModal').modal('hide');
+        } else {
+            $('#addphotoModal').modal('hide');
             toastr.error('PHOTO UPLOAD FAILED');
-    }
- 
-  }).catch(function(error){
-     $('#addphotoModal').modal('hide');
-            toastr.error('PHOTO UPLOAD FAILED');
-  })
-    
-})
+        }
 
+    }).catch(function(error) {
+        $('#addphotoModal').modal('hide');
+        toastr.error('PHOTO UPLOAD FAILED');
+    })
+
+})
 
 photoload()
-function photoload(){
 
-axios.get('/photoselect').then(function(response){
+function photoload() {
 
-    $('#galleryload').addClass('d-none');
-$.each(response.data, function(i, item) {
-                    $("<div class='col-md-4 p-2'>").html(
+    axios.get('/photoselect').then(function(response) {
 
-                      "<img class='photoshow img-thumbnail' src="+item['location']+" >"  
+        $('#galleryload').addClass('d-none');
+        $.each(response.data, function(i, item) {
+            $("<div class='col-md-4 p-1'>").html(
 
-                    ).appendTo('#photoid');
-                });
+                "<img data-id=" + item['id'] + " class='photoshow img-thumbnail' src=" + item['location'] + " >"
 
+            ).appendTo('#photoloadid');
+        });
 
+    }).catch(function(error) {
 
-}).catch(function(error){
-
-})
+    })
 
 }
+
+  var imageload=0;      //this should be same value 
+
+ function imageloadmore(photoid,loadspin){
+
+    imageload=imageload+6;    //this should be same value 
+
+  let imageloadmore=photoid+imageload;
+
+  let URL="/photoload/"+imageloadmore;
+$('#loadmore').html("<div class='spinner-border spinner-border-sm' role='status'></div>");
+    axios.get(URL).then(function(response) {
+
+            $('#loadmore').html("LOAD MORE");
+        $('#galleryload').addClass('d-none');
+        $.each(response.data, function(i, item) {
+            $("<div class='col-md-4 p-1'>").html(
+
+                "<img data-id=" + item['id'] + " class='photoshow img-thumbnail' src=" + item['location'] + " >"
+
+            ).appendTo('#photoloadid');
+        });
+
+    })
+
+ }
+
+
+$('#loadmore').on('click',function(){
+
+    let loadspin=$(this);
+
+    let photoid=$(this).closest('div').find('img').data('id');
+
+imageloadmore(photoid,loadspin);
+
+})
 
 
 
 $('#photoinsertbtn').click(function() {
-	$("#addphotoModal").modal("show");
+    $("#addphotoModal").modal("show");
 });
 </script>
 

@@ -15,9 +15,24 @@ class photocontroller extends Controller
 
 
    function photoselect(){
-     $result= photomodel::all();
+     $result= photomodel::take(6)->get();
      return $result;
    }
+
+   // photo load on page
+
+
+   function photoload(Request $req){
+
+      $firstid=$req->id;
+      $lastid=$firstid+6;
+
+      return photomodel::where('id','>=',$firstid)->where('id','<',$lastid)->get();
+
+
+
+   }
+
 
   function photoupload(Request $req){
 
