@@ -23,10 +23,14 @@ v.Then last we can see footer section.
 IN ADMIN PAGE :-
 
 1.I have tried to fetch the visitor url .
-2.Create service section.
-3.Create course section.
-4.Create project section.
-5.Create review/testimonial section.
-6.Create a Gallery section.
-7.Lastly i create a login and logout system.
+2.Created service section.
+3.Created course section.
+4.Created project section.
+5.Created review/testimonial section.
+6.Created a Gallery section.
+7.Lastly, i have created a login and logout system.
+
+
+
+
 
