@@ -98,3 +98,5 @@ Route::post('/photoupload','App\Http\Controllers\photocontroller@photoupload')->
 Route::get('/photoselect','App\Http\Controllers\photocontroller@photoselect')->middleware('logincheck');
 
 Route::get('/photoload/{id}','App\Http\Controllers\photocontroller@photoload')->middleware('logincheck');
+
+Route::post('/photodelete','App\Http\Controllers\photocontroller@photodelete')->middleware('logincheck');

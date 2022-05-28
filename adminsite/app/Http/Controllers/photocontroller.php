@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\photomodel;
 
+use Illuminate\Support\Facades\Storage;
+
+
 class photocontroller extends Controller
 {
    function photoindex()
@@ -48,6 +51,26 @@ class photocontroller extends Controller
    $result=photomodel::insert(['location'=>$photopath]);
 
    return $result;
+
+  }
+
+  // photo delete function 
+
+  function photodelete(Request $req){
+
+   $oldphotourl=$req->input('oldphotourl');
+   $oldphotoid=$req->input('id');
+
+   $oldphotoarray=explode("/",$oldphotourl);
+   $oldphotoname=end($oldphotoarray);
+   
+   $deletephotofile=Storage::delete('public/'.$oldphotoname);
+
+   $deleterow=photomodel::where('id','=',$oldphotoid)->delete();
+
+   return $deleterow;
+
+
 
   }
 

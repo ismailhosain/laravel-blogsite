@@ -112,10 +112,22 @@ function photoload() {
         $.each(response.data, function(i, item) {
             $("<div class='col-md-4 p-1'>").html(
 
-                "<img data-id=" + item['id'] + " class='photoshow img-thumbnail' src=" + item['location'] + " >"
+                "<img data-id=" + item['id'] + " class='photoshow img-thumbnail' src=" + item['location'] + " >"+
+                "<button data-id=" + item['id'] +" data-photo=" + item['location'] +" class='btn photodelete btn-sm btn-danger'>DELETE</button>"
 
             ).appendTo('#photoloadid');
-        });
+        })
+
+         $('.photodelete').on('click',function(event){
+
+                let id=$(this).data('id');
+                let photo=$(this).data('photo');
+
+                photodelete(photo,id);
+
+            event.preventDefault();
+        })
+
 
     }).catch(function(error) {
 
@@ -140,10 +152,10 @@ $('#loadmore').html("<div class='spinner-border spinner-border-sm' role='status'
         $.each(response.data, function(i, item) {
             $("<div class='col-md-4 p-1'>").html(
 
-                "<img data-id=" + item['id'] + " class='photoshow img-thumbnail' src=" + item['location'] + " >"
-
+                "<img data-id=" + item['id'] + " class='photoshow img-thumbnail' src=" + item['location'] + " >"+
+                "<button data-id=" + item['id'] +" data-photo=" + item['location'] +" class='btn btn-sm btn-danger'>DELETE</button>"
             ).appendTo('#photoloadid');
-        });
+        })
 
     })
 
@@ -160,7 +172,30 @@ imageloadmore(photoid,loadspin);
 
 })
 
+function photodelete(oldphotourl,id){
 
+    let URL="/photodelete";
+
+    let MyFormData=new FormData();
+
+    MyFormData.append('oldphotourl',oldphotourl);
+    MyFormData.append('id',id);
+
+    axios.post(URL,MyFormData).then(function(response){
+
+        if(response.status==200 && response.data==1){
+            toastr.success("Successfully DELETED");
+            window.location.href="/photo";
+        }else{
+            toastr.error("DELETE failed");
+        }
+
+    }).catch(function(error){
+ toastr.error("Not DELETED");
+    })
+
+
+}
 
 $('#photoinsertbtn').click(function() {
     $("#addphotoModal").modal("show");
