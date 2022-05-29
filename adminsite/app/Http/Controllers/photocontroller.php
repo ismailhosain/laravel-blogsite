@@ -18,7 +18,7 @@ class photocontroller extends Controller
 
 
    function photoselect(){
-     $result= photomodel::take(6)->get();
+     $result= photomodel::take(8)->get();
      return $result;
    }
 
@@ -28,7 +28,7 @@ class photocontroller extends Controller
    function photoload(Request $req){
 
       $firstid=$req->id;
-      $lastid=$firstid+6;
+      $lastid=$firstid+8;
 
       return photomodel::where('id','>=',$firstid)->where('id','<',$lastid)->get();
 

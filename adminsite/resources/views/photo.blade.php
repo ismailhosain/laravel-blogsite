@@ -110,9 +110,11 @@ function photoload() {
 
         $('#galleryload').addClass('d-none');
         $.each(response.data, function(i, item) {
-            $("<div class='col-md-4 p-1'>").html(
+            $("<div class='col-md-3 p-1'>").html(
 
                 "<img data-id=" + item['id'] + " class='photoshow img-thumbnail' src=" + item['location'] + " >"+
+                "<input type='text' value=" + item['location'] + ">"+
+                
                 "<button data-id=" + item['id'] +" data-photo=" + item['location'] +" class='btn photodelete btn-sm btn-danger'>DELETE</button>"
 
             ).appendTo('#photoloadid');
@@ -139,7 +141,7 @@ function photoload() {
 
  function imageloadmore(photoid,loadspin){
 
-    imageload=imageload+6;    //this should be same value 
+    imageload=imageload+8;    //this should be same value 
 
   let imageloadmore=photoid+imageload;
 
@@ -150,9 +152,10 @@ $('#loadmore').html("<div class='spinner-border spinner-border-sm' role='status'
             $('#loadmore').html("LOAD MORE");
         $('#galleryload').addClass('d-none');
         $.each(response.data, function(i, item) {
-            $("<div class='col-md-4 p-1'>").html(
+            $("<div class='col-md-3 p-1'>").html(
 
                 "<img data-id=" + item['id'] + " class='photoshow img-thumbnail' src=" + item['location'] + " >"+
+                "<input type='text' value=" + item['location'] + ">"+
                 "<button data-id=" + item['id'] +" data-photo=" + item['location'] +" class='btn btn-sm btn-danger'>DELETE</button>"
             ).appendTo('#photoloadid');
         })
