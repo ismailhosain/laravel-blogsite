@@ -329,7 +329,7 @@ function serviceupdatesave(id, servicename, servicedesc, serviceimg) {
 
 //                             <=====insert section start=====>
 
-// service add info sertion
+// service add info section
 
 $('#serviceinsertbtn').click(function(){
 

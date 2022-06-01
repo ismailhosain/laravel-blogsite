@@ -158,7 +158,7 @@
 
 getcoursesdata()  //this is for (custom js's) main function which is called here to execute js function
 
-// course js section start
+// course js section start to fetch
 function getcoursesdata() { //this function call to service view in js tag
 
     axios.get('/getcourse')
@@ -207,13 +207,13 @@ function getcoursesdata() { //this function call to service view in js tag
                 })
 
 
-                // course table modal edit yes btn click
+                // // course table modal edit yes btn click
 
-                $('#serviceeditbtn').click(function() {
-                    var id = $('#serviceeditid').html();
-                    serviceeditsection(id);
+                // $('#serviceeditbtn').click(function() {
+                //     var id = $('#serviceeditid').html();
+                //     serviceeditsection(id);
 
-                });
+                // });
 
                 $('#coursedatatable').DataTable({order:false});
                 $('.dataTables_length').addClass('bs-select');
@@ -398,7 +398,7 @@ function courseupdatesave(id, coursename, coursedes, coursefee, coursetotalenrol
 
 //                             <=====insert section start=====>
 
-// Course add info sertion to reload form
+// Course add info section to reload form
 
 $('#courseinsertbtn').click(function() {
 
